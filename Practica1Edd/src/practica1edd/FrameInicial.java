@@ -35,6 +35,11 @@ public class FrameInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jbtnPlantas.setText("Plantas");
+        jbtnPlantas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPlantasActionPerformed(evt);
+            }
+        });
 
         jbtnZombisd.setText("Zombis");
 
@@ -72,6 +77,13 @@ public class FrameInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnPlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPlantasActionPerformed
+        // TODO add your handling code here:
+       FrameJugador fj= new FrameJugador();
+       fj.TipoJugador= "Plantas";
+               
+    }//GEN-LAST:event_jbtnPlantasActionPerformed
 
     /**
      * @param args the command line arguments
