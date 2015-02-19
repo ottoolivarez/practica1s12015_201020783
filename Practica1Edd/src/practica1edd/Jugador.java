@@ -11,9 +11,9 @@ package practica1edd;
  */
 
 public class Jugador {
-  public Jugador siguienteJ;
-  public Jugador anteriorJ;
-  public DatosJugador raiz_dato;
+  public Jugador siguienteJ=null;
+  public Jugador anteriorJ=null;
+  public DatosJugador raiz_dato=null;
   public String nombre; 
   public int cantidad; 
   public boolean tipo;

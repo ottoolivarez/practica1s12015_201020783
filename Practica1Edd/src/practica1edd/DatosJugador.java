@@ -10,7 +10,7 @@ package practica1edd;
  * @author oolivarez
  */
 public class DatosJugador {
-    public DatosJugador anterior;
-    public DatosJugador Siguiente;
+    public DatosJugador anterior=null;
+    public DatosJugador Siguiente=null;
     public String Dato;
 }

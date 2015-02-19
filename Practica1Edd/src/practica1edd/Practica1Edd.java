@@ -18,10 +18,15 @@ public class Practica1Edd {
     
     
     
+    
     public static void main(String[] args) {
         // TODO code application logic here
         
         System.out.println("Programando con repositorios");
+    
+        FrameInicial fi = new FrameInicial();
+        fi.setVisible(true);
+           
     }
     
 }
