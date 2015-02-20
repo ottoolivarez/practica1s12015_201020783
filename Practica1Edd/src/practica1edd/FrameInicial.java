@@ -158,7 +158,7 @@ public class FrameInicial extends javax.swing.JFrame {
            }
         }
     }
-    private void Graficar(String dotText,String nameRep){
+    private void Graficar(String nameRep){
             try
 		{       
 			ProcessBuilder pbuilder;
@@ -168,7 +168,7 @@ public class FrameInicial extends javax.swing.JFrame {
 			 * en la linea de comandos esto es: 
 			 * dot -Tpng -o archivo.png archivo.dot
 			 */
-			pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o",this.dotImagepath, this.dotpath);
+			pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o",this.dotImagepath + nameRep + ".png" , this.dotpath);
 			pbuilder.redirectErrorStream( true );
 			//Ejecuta el proceso
 			pbuilder.start();
@@ -179,6 +179,8 @@ public class FrameInicial extends javax.swing.JFrame {
     private void jbtnPlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPlantasActionPerformed
         // TODO add your handling code here:
        FrameJugador fj= new FrameJugador();
+       fj.setLayout(null);
+       fj.setSize(this.getWidth(), this.getHeight());
        fj.TipoJugador=true;
        fj.setVisible(true);
     }//GEN-LAST:event_jbtnPlantasActionPerformed
@@ -191,6 +193,8 @@ public class FrameInicial extends javax.swing.JFrame {
     private void jbtnZombisdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnZombisdActionPerformed
         // TODO add your handling code here 
         FrameJugador fj= new FrameJugador();
+        fj.setLayout(null);
+        fj.setSize(400,400);
         fj.TipoJugador=false;
         fj.setVisible(true);
        
@@ -199,6 +203,54 @@ public class FrameInicial extends javax.swing.JFrame {
 
     private void jmenuRepJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuRepJugadoresActionPerformed
         // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder(); 
+        StringBuilder rs= new StringBuilder(); // {rank=same; A B D}  -- nodos del mismo nivel
+        
+        if (!(Practica1Edd.raizJugador==null)){
+        
+          
+            Jugador aux = Practica1Edd.raizJugador;
+            int contador=1;
+          while(aux!=null){  
+            rs.append("{rank=same; ");
+            sb.append("digraph g{ \n ");
+            sb.append("J");sb.append(contador);                        
+            sb.append(" [sape=box];\n ");
+            sb.append("J");sb.append(contador);
+            sb.append(" [label=\"");
+            sb.append(aux.nombre);
+            sb.append("\\n");
+            sb.append(aux.cantidad);
+            sb.append("\"];\n");
+            rs.append("J");sb.append(contador);
+            rs.append(" ");
+            if (!(aux.raiz_dato==null)){
+                DatosJugador dj1=aux.raiz_dato;
+                while(dj1!=null){
+                    sb.append("->");
+                    sb.append(dj1.Dato);
+                    sb.append("\n");
+                    rs.append(dj1.Dato);
+                    rs.append(" ");
+                    dj1= dj1.Siguiente;
+                }
+                rs.append("}\n {rank=same; ");
+            }
+           aux= aux.siguienteJ;
+           contador+=1;
+          }
+          sb.append("\n");
+          sb.append(rs.toString());
+          sb.append("\n}");
+            //se guarda un txt
+            this.GenerarDotText(sb.toString());
+            this.Graficar("Jugadores");
+            
+            JOptionPane.showMessageDialog(this,sb.toString());
+        }else{
+        JOptionPane.showMessageDialog(this, "No hay jugadores");
+        }
+        
         
     }//GEN-LAST:event_jmenuRepJugadoresActionPerformed
 

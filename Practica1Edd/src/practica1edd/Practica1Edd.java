@@ -25,6 +25,8 @@ public class Practica1Edd {
         System.out.println("Programando con repositorios");
     
         FrameInicial fi = new FrameInicial();
+        fi.setLayout(null);
+        fi.setSize(400,400);
         fi.setVisible(true);
            
     }
