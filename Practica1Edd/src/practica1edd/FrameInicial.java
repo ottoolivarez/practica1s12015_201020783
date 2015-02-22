@@ -65,6 +65,11 @@ public class FrameInicial extends javax.swing.JFrame {
         });
 
         jbtnJugar.setText("Comenzar");
+        jbtnJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnJugarActionPerformed(evt);
+            }
+        });
 
         jbtnCancelar.setText("Cancelar");
 
@@ -183,6 +188,7 @@ public class FrameInicial extends javax.swing.JFrame {
        fj.setSize(this.getWidth(), this.getHeight());
        fj.TipoJugador=true;
        fj.setVisible(true);
+       this.jbtnPlantas.setEnabled(false);
     }//GEN-LAST:event_jbtnPlantasActionPerformed
 
     private void jmAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAcercaDeActionPerformed
@@ -197,7 +203,7 @@ public class FrameInicial extends javax.swing.JFrame {
         fj.setSize(400,400);
         fj.TipoJugador=false;
         fj.setVisible(true);
-       
+       this.jbtnZombisd.setEnabled(false);
         
     }//GEN-LAST:event_jbtnZombisdActionPerformed
 
@@ -208,22 +214,29 @@ public class FrameInicial extends javax.swing.JFrame {
         
         if (!(Practica1Edd.raizJugador==null)){
         
-          
+           sb.append("digraph g{\n ");
+           rs.append("{rank=same; ");
             Jugador aux = Practica1Edd.raizJugador;
             int contador=1;
           while(aux!=null){  
-            rs.append("{rank=same; ");
-            sb.append("digraph g{ \n ");
-            sb.append("J");sb.append(contador);                        
-            sb.append(" [sape=box];\n ");
+                       
+            sb.append(" J");sb.append(contador);                        
+            sb.append("[shape=box];\n ");
             sb.append("J");sb.append(contador);
-            sb.append(" [label=\"");
+            sb.append("[label=\"");
             sb.append(aux.nombre);
             sb.append("\\n");
             sb.append(aux.cantidad);
-            sb.append("\"];\n");
-            rs.append("J");sb.append(contador);
+            sb.append("\"];");
+            if (contador>1){
+                 sb.append("\n J");sb.append(contador-1);
+                  sb.append("->");
+                  sb.append("J");sb.append(contador);
+            }    
+            sb.append("\n J");sb.append(contador);
+            rs.append("J");rs.append(contador);
             rs.append(" ");
+            
             if (!(aux.raiz_dato==null)){
                 DatosJugador dj1=aux.raiz_dato;
                 while(dj1!=null){
@@ -253,6 +266,14 @@ public class FrameInicial extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jmenuRepJugadoresActionPerformed
+
+    private void jbtnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnJugarActionPerformed
+        // TODO add your handling code here:
+        DisenoCatalogo dc =new DisenoCatalogo();
+        dc.setSize(900,500);
+        dc.setVisible(true);
+        
+    }//GEN-LAST:event_jbtnJugarActionPerformed
 
     /**
      * @param args the command line arguments

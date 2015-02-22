@@ -15,7 +15,10 @@ public class Practica1Edd {
      * @param args the command line arguments
      */
     public static Jugador raizJugador;
+    public static ListaPersonajes catPlantas;
+    public static ListaPersonajes catZombiz;
     
+    public static Personaje Plantas;
     
     
     
