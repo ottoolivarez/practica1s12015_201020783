@@ -184,6 +184,7 @@ public class FrameInicial extends javax.swing.JFrame {
     private void jbtnPlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPlantasActionPerformed
         // TODO add your handling code here:
        FrameJugador fj= new FrameJugador();
+       fj.TipoJugador=true;
        fj.setLayout(null);
        fj.setSize(this.getWidth(), this.getHeight());
        fj.TipoJugador=true;
@@ -199,6 +200,7 @@ public class FrameInicial extends javax.swing.JFrame {
     private void jbtnZombisdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnZombisdActionPerformed
         // TODO add your handling code here 
         FrameJugador fj= new FrameJugador();
+        fj.TipoJugador=false;
         fj.setLayout(null);
         fj.setSize(400,400);
         fj.TipoJugador=false;
@@ -271,8 +273,10 @@ public class FrameInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (Practica1Edd.raizJugador!=null){
         DisenoCatalogo dc =new DisenoCatalogo();
-        dc.setSize(900,500);
         dc.setJugador(Practica1Edd.raizJugador);
+        dc.intiOtrosComponentes();
+        dc.setSize(900,500);
+        JOptionPane.showMessageDialog(this,Practica1Edd.raizJugador.tipo +"");
         dc.setVisible(true);
         }else{
         JOptionPane.showMessageDialog(this, "no hay mas jugadores");
