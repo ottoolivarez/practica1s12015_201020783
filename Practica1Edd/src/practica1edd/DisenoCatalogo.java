@@ -9,6 +9,7 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,16 +24,43 @@ public class DisenoCatalogo extends javax.swing.JFrame {
     public String img2="";
     public String img3="";
   */  
-    public ImageIcon img1= new ImageIcon("C:\\eddPractica1\\Img\\Plants1.jpg");
-    public ImageIcon img2= new ImageIcon("C:\\eddPractica1\\Img\\Plants2.jpg");
-    public ImageIcon img3= new ImageIcon("C:\\eddPractica1\\Img\\Plants3.jpg");
+    
+    public Jugador jugador;
+    
+    public ImageIcon img1;//= new ImageIcon("C:\\eddPractica1\\Img\\Plants1.jpg");
+    public ImageIcon img2;//= new ImageIcon("C:\\eddPractica1\\Img\\Plants2.jpg");
+    public ImageIcon img3;//= new ImageIcon("C:\\eddPractica1\\Img\\Plants3.jpg");
     
     public DisenoCatalogo() {
         initComponents();
+        initImages();
         InitCombos();
         this.repaint();
     }
     
+    public void setJugador(Jugador j){
+        this.jugador=j; 
+        if(jugador.tipo){
+            this.jlblTitulo.setText("Plantas \n  Jugador: "+jugador.nombre);
+        }else{
+            this.jlblTitulo.setText("Zombis \n  Jugador: "+jugador.nombre);
+        }
+    }
+    
+    private void initImages(){
+    if(jugador.tipo){
+    img1= new ImageIcon("C:\\eddPractica1\\Img\\Plants1.jpg");
+    img2= new ImageIcon("C:\\eddPractica1\\Img\\Plants2.jpg");
+    img3= new ImageIcon("C:\\eddPractica1\\Img\\Plants3.jpg");
+    this.jlblTitulo.setText("Plantas \n  Jugador: "+jugador.nombre);
+    }else{
+    img1= new ImageIcon("C:\\eddPractica1\\Img\\Zombis1.jpg");
+    img2= new ImageIcon("C:\\eddPractica1\\Img\\Zombis2.jpg");
+    img3= new ImageIcon("C:\\eddPractica1\\Img\\Zombis3.jpg");
+    this.jlblTitulo.setText("Zombis \n  Jugador: "+jugador.nombre);
+    }
+    
+    }
     
     private void InitCombos(){
         
@@ -81,6 +109,7 @@ public class DisenoCatalogo extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jlblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -271,6 +300,10 @@ public class DisenoCatalogo extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(230, 60, 430, 330);
 
+        jlblTitulo.setText("jLabel12");
+        getContentPane().add(jlblTitulo);
+        jlblTitulo.setBounds(40, 400, 390, 50);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -297,17 +330,32 @@ public class DisenoCatalogo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
         Personaje personaje= new Personaje();
         personaje.imageicon=this.jlblImagen.getIcon();
         personaje.nombre= this.jtxtNombre.getText();
         personaje.defensa= Integer.parseInt(this.jtxtPuntosDefensa.getText());
         personaje.ataque= Integer.parseInt(this.jtxtPuntosAtaque.getText());
         personaje.tipoAtaque= this.jcbTipoAtaque.getSelectedIndex();
+        personaje.cantidad= Integer.parseInt(this.jtxtCantidad.getText());
         
+        Practica1Edd.CatPlantas.insertPersonaje(personaje);
+        }catch(Exception ex){
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        if(jugador.siguienteJ!=null){
+             DisenoCatalogo dc =new DisenoCatalogo();
+             dc.setSize(900,500);
+            dc.setJugador(jugador.siguienteJ);
+            dc.setVisible(true);
+        }
+        this.setVisible(false);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jtxtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtCantidadActionPerformed
@@ -371,6 +419,7 @@ public class DisenoCatalogo extends javax.swing.JFrame {
     private javax.swing.JComboBox jcbImagen;
     private javax.swing.JComboBox jcbTipoAtaque;
     private javax.swing.JLabel jlblImagen;
+    private javax.swing.JLabel jlblTitulo;
     private javax.swing.JTextField jtxtCantidad;
     private javax.swing.JTextField jtxtNombre;
     private javax.swing.JTextField jtxtPuntosAtaque;

@@ -269,9 +269,14 @@ public class FrameInicial extends javax.swing.JFrame {
 
     private void jbtnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnJugarActionPerformed
         // TODO add your handling code here:
+        if (Practica1Edd.raizJugador!=null){
         DisenoCatalogo dc =new DisenoCatalogo();
         dc.setSize(900,500);
+        dc.setJugador(Practica1Edd.raizJugador);
         dc.setVisible(true);
+        }else{
+        JOptionPane.showMessageDialog(this, "no hay mas jugadores");
+                }
         
     }//GEN-LAST:event_jbtnJugarActionPerformed
 

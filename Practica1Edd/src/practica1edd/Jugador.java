@@ -16,5 +16,27 @@ public class Jugador {
   public DatosJugador raiz_dato=null;
   public String nombre; 
   public int cantidad; 
-  public boolean tipo;
+  public boolean tipo; //true para plantas y false para zombis
+  
+  public Personaje CatalogoPersonaje;
+  public Personaje ListaPersonajes;
+  public int contPersonajes;
+  
+  public void clonarCatalogo(){
+  }
+  
+  public void setPersonaje(){
+        
+  }
+  
+  public void getPersonaje(){
+  
+  }
+  
+  public String toDotCatalgo(){
+  return "";
+  }
+  
+  
+  
 }

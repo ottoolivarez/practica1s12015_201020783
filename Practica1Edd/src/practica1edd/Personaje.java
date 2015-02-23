@@ -7,12 +7,15 @@ package practica1edd;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author otto
  */
-public class Personaje  extends javax.swing.JLabel{
+public class Personaje  extends javax.swing.JLabel implements Cloneable{
+    
+ public Personaje anterior, siguiente;   
  public  String imagePath;
  public String nombre;
  public  int ataque; 
@@ -21,4 +24,15 @@ public class Personaje  extends javax.swing.JLabel{
  public  int cantidad;
  Icon imageicon;
     
+ 
+ public Personaje clone(){
+     Personaje obj=null;
+     try{
+         obj= (Personaje)super.clone();
+     }catch(CloneNotSupportedException ex){
+         JOptionPane.showMessageDialog(this, ex.toString());
+     }
+     
+     return obj;
+ }
 }
