@@ -5,11 +5,15 @@
  */
 package practica1edd;
 
+import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -26,6 +30,8 @@ public class DisenoCatalogo extends javax.swing.JFrame {
   */  
     
     public Jugador jugador;
+    public ListaPersonajes raizLp;
+    
     
     public ImageIcon img1;//= new ImageIcon("C:\\eddPractica1\\Img\\Plants1.jpg");
     public ImageIcon img2;//= new ImageIcon("C:\\eddPractica1\\Img\\Plants2.jpg");
@@ -41,6 +47,7 @@ public class DisenoCatalogo extends javax.swing.JFrame {
         InitCombos();
         this.repaint();
     }
+   
     public void setJugador(Jugador j){
         this.jugador=j; 
         if(jugador.tipo){
@@ -52,14 +59,14 @@ public class DisenoCatalogo extends javax.swing.JFrame {
     
     private void initImages(){
     if(jugador.tipo){
-    img1= new ImageIcon("C:\\eddPractica1\\Img\\Plants1.jpg");
-    img2= new ImageIcon("C:\\eddPractica1\\Img\\Plants2.jpg");
-    img3= new ImageIcon("C:\\eddPractica1\\Img\\Plants3.jpg");
+    img1= new ImageIcon("C:\\eddPractica1\\Img\\Plants1.png");
+    img2= new ImageIcon("C:\\eddPractica1\\Img\\Plants2.png");
+    img3= new ImageIcon("C:\\eddPractica1\\Img\\Plants3.png");
     this.jlblTitulo.setText("Plantas \n  Jugador: "+jugador.nombre);
     }else{
-    img1= new ImageIcon("C:\\eddPractica1\\Img\\Zombis1.jpg");
-    img2= new ImageIcon("C:\\eddPractica1\\Img\\Zombis2.jpg");
-    img3= new ImageIcon("C:\\eddPractica1\\Img\\Zombis3.jpg");
+    img1= new ImageIcon("C:\\eddPractica1\\Img\\Zombis1.png");
+    img2= new ImageIcon("C:\\eddPractica1\\Img\\Zombis2.png");
+    img3= new ImageIcon("C:\\eddPractica1\\Img\\Zombis3.png");
     this.jlblTitulo.setText("Zombis \n  Jugador: "+jugador.nombre);
     }
     
@@ -77,7 +84,19 @@ public class DisenoCatalogo extends javax.swing.JFrame {
        this.jcbTipoAtaque.addItem("Directo");
        this.jcbTipoAtaque.addItem("Proyectil");
     }
-
+    
+    public void actualizarPantalla(){ 
+        Container temp=this.getContentPane(); 
+        SwingUtilities.updateComponentTreeUI(temp);
+        temp.validate();
+    }
+    
+    public void LimpiarCampos(){
+        this.jtxtCantidad.setText("");
+        this.jtxtNombre.setText("");
+        this.jtxtPuntosAtaque.setText("");
+        this.jtxtPuntosDefensa.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,32 +123,21 @@ public class DisenoCatalogo extends javax.swing.JFrame {
         jcbTipoAtaque = new javax.swing.JComboBox();
         jtxtCantidad = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jbtnListo = new javax.swing.JButton();
         jlblTitulo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jtxtNombre.setText(" ");
-
         jLabel1.setText("Nombre");
 
         jLabel2.setText("Tipo Ataque");
 
-        jtxtPuntosAtaque.setText(" ");
-
         jLabel3.setText("P. Ataque");
-
-        jtxtPuntosDefensa.setText(" ");
 
         jLabel4.setText("Cantidad");
 
@@ -157,7 +165,6 @@ public class DisenoCatalogo extends javax.swing.JFrame {
 
         jcbTipoAtaque.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jtxtCantidad.setText(" ");
         jtxtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtCantidadActionPerformed(evt);
@@ -176,7 +183,7 @@ public class DisenoCatalogo extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -243,9 +250,9 @@ public class DisenoCatalogo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jcbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jlblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
@@ -257,55 +264,25 @@ public class DisenoCatalogo extends javax.swing.JFrame {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(10, 10, 216, 380);
 
-        jButton4.setText("Listo");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbtnListo.setText("Listo!");
+        jbtnListo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbtnListoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(500, 400, 160, 40);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new java.awt.GridLayout(1, 1));
-
-        jLabel6.setText("Imagen");
-        jPanel1.add(jLabel6);
-
-        jLabel7.setText("Nombre");
-        jPanel1.add(jLabel7);
-
-        jLabel8.setText("Puntos Ataque");
-        jPanel1.add(jLabel8);
-
-        jLabel9.setText("Puntos Defensa ");
-        jPanel1.add(jLabel9);
-
-        jLabel10.setText("Tipo Ataque");
-        jPanel1.add(jLabel10);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(230, 10, 430, 40);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(230, 60, 430, 330);
+        getContentPane().add(jbtnListo);
+        jbtnListo.setBounds(500, 400, 160, 40);
 
         jlblTitulo.setText("jLabel12");
         getContentPane().add(jlblTitulo);
         jlblTitulo.setBounds(40, 400, 390, 50);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(new java.awt.GridLayout());
+        jScrollPane1.setViewportView(jPanel3);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(230, 10, 670, 380);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -332,34 +309,62 @@ public class DisenoCatalogo extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbImagenActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling coe here:
+          Personaje personaje= new Personaje();
         try{
-        Personaje personaje= new Personaje();
+      
         personaje.imageicon=this.jlblImagen.getIcon();
         personaje.nombre= this.jtxtNombre.getText();
         personaje.defensa= Integer.parseInt(this.jtxtPuntosDefensa.getText());
         personaje.ataque= Integer.parseInt(this.jtxtPuntosAtaque.getText());
         personaje.tipoAtaque= this.jcbTipoAtaque.getSelectedIndex();
         personaje.cantidad= Integer.parseInt(this.jtxtCantidad.getText());
+       
+       this.raizLp= new ListaPersonajes(jugador.tipo);
+       raizLp.insertPersonaje(personaje);
+         /*  for (int i=1; i==cantidad;i++){
+           //Practica1Edd.CatPlantas.insertPersonaje(personaje);
+           } */
+        GridLayout layout = new GridLayout(0,1);
         
-        Practica1Edd.CatPlantas.insertPersonaje(personaje);
+        personaje.setText("Nombre: "+personaje.nombre+"      P. Ataque: "+personaje.ataque+"    P. Defensa: "+personaje.defensa+"     Tipo Ataque: "+this.jcbTipoAtaque.getItemAt(personaje.tipoAtaque));
+        personaje.setSize(this.jPanel3.getWidth()-10,100);
+        personaje.setIcon(personaje.imageicon);
+        personaje.setVisible(true);
+        this.jPanel3.setLayout(layout);
+        this.jPanel3.add(personaje);
+        this.actualizarPantalla();
+        this.LimpiarCampos();
+        
         }catch(Exception ex){
         JOptionPane.showMessageDialog(this, ex.getMessage());
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbtnListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnListoActionPerformed
         // TODO add your handling code here:
+        if(this.raizLp!=null){
+            if(this.raizLp.contadorPersonajes>0){
+        // si hay jugadores pendientes 
         if(jugador.siguienteJ!=null){
              DisenoCatalogo dc =new DisenoCatalogo();
              dc.setSize(900,500);
-            dc.setJugador(jugador.siguienteJ);
-            dc.setVisible(true);
+             dc.setJugador(jugador.siguienteJ);
+             dc.setVisible(true);
+        }else{
+            /*AQUI SE LLAMA AL JFORM DEL JUEGO COMO TAL*/
         }
         this.setVisible(false);
         this.dispose();
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
+            }else{
+            JOptionPane.showMessageDialog(this,"Ingrese al menos un personaje");
+            }
+        }else{
+        JOptionPane.showMessageDialog(this,"No a ingresando personajes");
+        }
+    }//GEN-LAST:event_jbtnListoActionPerformed
 
     private void jtxtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtCantidadActionPerformed
         // TODO add your handling code here:
@@ -404,21 +409,16 @@ public class DisenoCatalogo extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtnListo;
     private javax.swing.JComboBox jcbImagen;
     private javax.swing.JComboBox jcbTipoAtaque;
     private javax.swing.JLabel jlblImagen;

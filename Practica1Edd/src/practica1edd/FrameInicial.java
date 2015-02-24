@@ -270,17 +270,30 @@ public class FrameInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jmenuRepJugadoresActionPerformed
 
     private void jbtnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnJugarActionPerformed
+         Personaje personaje= new Personaje();
+        
+        personaje.nombre= "han";
+        personaje.defensa= 15;
+        personaje.ataque= 5;
+        personaje.tipoAtaque= 1;
+        
+        Jugador jugador= new Jugador();
+        jugador.nombre="han";
+        jugador.cantidad=45;
+        jugador.tipo=true;
         // TODO add your handling code here:
-        if (Practica1Edd.raizJugador!=null){
+       // if (Practica1Edd.raizJugador!=null){
+        
+        
         DisenoCatalogo dc =new DisenoCatalogo();
-        dc.setJugador(Practica1Edd.raizJugador);
+        dc.setJugador(jugador);//Practica1Edd.raizJugador);
         dc.intiOtrosComponentes();
-        dc.setSize(900,500);
-        JOptionPane.showMessageDialog(this,Practica1Edd.raizJugador.tipo +"");
+        dc.setSize(950,500);
+      //  JOptionPane.showMessageDialog(this,Practica1Edd.raizJugador.tipo +"");
         dc.setVisible(true);
-        }else{
-        JOptionPane.showMessageDialog(this, "no hay mas jugadores");
-                }
+       // }else{
+       // JOptionPane.showMessageDialog(this, "no hay mas jugadores");
+       //        }
         
     }//GEN-LAST:event_jbtnJugarActionPerformed
 

@@ -42,7 +42,21 @@ public class ListaPersonajes {
         contadorRestantes=contadorPersonajes;
     }
     
-    public Personaje getPersonaje(){
+    public Personaje getPersonaje(String nombre){
+        Personaje aux;
+        aux=raiz;
+        while(aux!=null){
+            if(aux.nombre.equalsIgnoreCase(nombre)){
+            break;
+            }else{
+           aux=aux.siguiente;
+            }
+        }
+        return aux;
+    }
+    
+    //QUEDA PENDIENTE EVALUAR CUANDO EL PERSONAJE ES LA RAIZ
+    public Personaje getPersonajeRand(){
         int indice;
         Random r= new Random();
         indice=r.nextInt(contadorRestantes)+1;
@@ -51,8 +65,10 @@ public class ListaPersonajes {
         for(int i=1;i==indice;i++){
             aux= aux.siguiente;
         }
+        if(aux==raiz){
+            raiz=null;
        //si el nodo es el final 
-        if(aux.siguiente==null){
+        }else if(aux.siguiente==null){
              aux.anterior.siguiente=null;
              
         }else if(aux==raiz){//si es la raiz
