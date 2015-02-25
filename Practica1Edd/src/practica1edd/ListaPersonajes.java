@@ -6,6 +6,7 @@
 package practica1edd;
 
 import java.util.Random;
+import javax.swing.JOptionPane;
 /**
  *
  * @author otto
@@ -25,6 +26,7 @@ public class ListaPersonajes {
     
     public void insertPersonaje(Personaje p){
         if (raiz==null){
+            raiz= new Personaje();
             raiz= p;
         }else{
             Personaje aux= raiz;
@@ -55,6 +57,21 @@ public class ListaPersonajes {
         return aux;
     }
     
+     public Personaje getPersonaje(){
+        Personaje aux=null;
+        if (raiz!=null){
+        aux=raiz;
+        JOptionPane.showMessageDialog(null, aux.nombre);
+          if (raiz.siguiente!=null){
+              raiz=raiz.siguiente;
+              raiz.anterior=null;
+          }else{
+              raiz=null;
+          }
+            
+        }
+        return aux;
+    }
     //QUEDA PENDIENTE EVALUAR CUANDO EL PERSONAJE ES LA RAIZ
     public Personaje getPersonajeRand(){
         int indice;

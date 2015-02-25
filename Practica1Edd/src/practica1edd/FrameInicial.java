@@ -84,6 +84,11 @@ public class FrameInicial extends javax.swing.JFrame {
         jMenu1.add(jmenuRepJugadores);
 
         jmRepCatalogo.setText("Catalogo");
+        jmRepCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRepCatalogoActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmRepCatalogo);
 
         jmRepPlantas.setText("Plantas");
@@ -296,6 +301,29 @@ public class FrameInicial extends javax.swing.JFrame {
        //        }
         
     }//GEN-LAST:event_jbtnJugarActionPerformed
+
+    private void jmRepCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRepCatalogoActionPerformed
+        /*StringBuilder sb = new StringBuilder(); 
+        StringBuilder rs= new StringBuilder(); // {rank=same; A B D}  -- nodos del mismo nivel
+        */
+        if (Practica1Edd.CatPlantas!=null){
+       
+            //se guarda un txt
+            this.GenerarDotText(Practica1Edd.CatPlantas.toDotGraph());
+            this.Graficar("Plantas");
+        }else{
+        JOptionPane.showMessageDialog(this, "No hay Plantas");
+        }
+        
+        if (Practica1Edd.CatZombis!=null){
+       
+            //se guarda un txt
+            this.GenerarDotText(Practica1Edd.CatZombis.toDotGraph());
+            this.Graficar("Zombis");
+        }else{
+        JOptionPane.showMessageDialog(this, "No hay Zombis");
+        }
+    }//GEN-LAST:event_jmRepCatalogoActionPerformed
 
     /**
      * @param args the command line arguments

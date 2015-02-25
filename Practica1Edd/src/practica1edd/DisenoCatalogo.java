@@ -74,6 +74,7 @@ public class DisenoCatalogo extends javax.swing.JFrame {
     
     private void InitCombos(){
         
+  
        //String TiposAtaque[]={"Proyectil","Directo"};
       // String Imagenes[]={"Imagen1","Imagen2","Imagen3"};
        this.jcbImagen.removeAllItems();
@@ -84,6 +85,36 @@ public class DisenoCatalogo extends javax.swing.JFrame {
        this.jcbTipoAtaque.addItem("Directo");
        this.jcbTipoAtaque.addItem("Proyectil");
     }
+    
+    private void guardarLista(){
+        
+        Practica1Edd.CatPlantas= new ListaPersonajes(this.jugador.tipo);
+        if (this.jugador.tipo){
+           Practica1Edd.CatPlantas= new ListaPersonajes(this.jugador.tipo);
+         }else{
+           Practica1Edd.CatZombis=new ListaPersonajes(this.jugador.tipo);
+         }
+        Personaje PAux;
+          do
+          {
+            PAux= raizLp.getPersonaje();
+            if(PAux!=null){
+            int cont = PAux.cantidad;
+            for (int i=0;i==cont;i++){
+                System.out.println("Contador en: " + i+"  de: "+ cont);
+                    if (this.jugador.tipo){
+                        Practica1Edd.CatPlantas.insertPersonaje(PAux);
+                    }else{
+                        Practica1Edd.CatZombis.insertPersonaje(PAux);
+                    }
+            }
+            }else{
+                   //JOptionPane.showMessageDialog(null, "ya no hay =)");
+                break;
+                    }
+          }
+        while(true);
+    }   
     
     public void actualizarPantalla(){ 
         Container temp=this.getContentPane(); 
@@ -346,18 +377,23 @@ public class DisenoCatalogo extends javax.swing.JFrame {
     private void jbtnListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnListoActionPerformed
         // TODO add your handling code here:
         if(this.raizLp!=null){
+            // si hay al menos una planta
             if(this.raizLp.contadorPersonajes>0){
-        // si hay jugadores pendientes 
-        if(jugador.siguienteJ!=null){
-             DisenoCatalogo dc =new DisenoCatalogo();
-             dc.setSize(900,500);
-             dc.setJugador(jugador.siguienteJ);
-             dc.setVisible(true);
-        }else{
-            /*AQUI SE LLAMA AL JFORM DEL JUEGO COMO TAL*/
-        }
-        this.setVisible(false);
-        this.dispose();
+                // si hay jugadores pendientes 
+                if(jugador.siguienteJ!=null){
+                    // SE GUARDA EL CATALOGO
+                    this.guardarLista();
+                    // SE INICIA EL NUEVO CATALOGO
+                     DisenoCatalogo dc =new DisenoCatalogo();
+                     dc.setSize(900,500);
+                     dc.setJugador(jugador.siguienteJ);
+                     dc.setVisible(true);
+                }else{
+                    this.guardarLista();
+                    /*AQUI SE LLAMA AL JFORM DEL JUEGO COMO TAL*/
+                }
+                this.setVisible(false);
+                this.dispose();
             }else{
             JOptionPane.showMessageDialog(this,"Ingrese al menos un personaje");
             }

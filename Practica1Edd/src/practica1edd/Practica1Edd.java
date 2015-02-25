@@ -17,10 +17,8 @@ public class Practica1Edd {
     public static Jugador raizJugador;
     public static ListaPersonajes CatPlantas;
     public static ListaPersonajes CatZombis;
-    
-    
-    
-    public static Personaje Plantas;
+
+   // public static Personaje Plantas;
     
     
     
